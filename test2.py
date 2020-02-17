@@ -1,9 +1,11 @@
 import json
 import requests
 
-print ('Nombre de usuario que desea consultar:')
+print ('Nombre de usuarios que desea consultar:')
 nombre = input()
-print ('Nombre de usuario:',nombre)
+nombre1= input()
+print ('Nombre del primer usuario:',nombre)
+print ('Nombre del segundo usuario',nombre1)
 
 #funcion score events
 def type(n):
@@ -30,24 +32,18 @@ def type(n):
         elif I==a:
             score=score+3            
         else:
-             score=score+1
+            score=score+1
     return score
-a=type(nombre)
-print ('GitHub events Score:',a)
-
 
 #funcion Followers
 def Followers(n):
-    a=0
-    
+    a=0    
     URL='https://api.github.com/users/'+n
     resp = requests.get(URL)
     data=json.loads(resp.content)
     a=data["followers"]
     
     return a
-b=Followers(nombre)
-print('Numero de seguidores:',b)
 
 #funcion Stars
 def Stars(n):
@@ -61,21 +57,34 @@ def Stars(n):
         a=data[k]["stargazers_count"]
         cont=cont+a
     return cont
-c=Stars(nombre)
-print('Numero total de estrellas:',c)
 
-PuntajeTotal=((a*0.4)+(c*0.4)+(b*0.2))
-print ("Puntaje Total:",PuntajeTotal)
+#funcion puntajetotalç
+def puntajet(a,b,c):
+    PuntajeTotal=((a*0.4)+(c*0.4)+(b*0.2))
+    return PuntajeTotal
 
-#funcion id
-def id(n):
-    a=0
-    
-    URL='https://api.github.com/users/'+n
-    resp = requests.get(URL)
-    data=json.loads(resp.content)
-    a=data["login"]
-    
-    return a
-m=id(nombre)
-print('ID:',m)
+#funcion battle
+def battle(n,n1):
+    a=type(n)
+    b=Followers(n)
+    c=Stars(n)
+    p1=puntajet(a,b,c)
+    me="puntaje "+n
+    mo="puntaje "+n1
+    print (me,p1)
+    d=type(n1)
+    e=Followers(n1)
+    f=Stars(n1)
+    p2=puntajet(d,e,f)
+    print(mo,p2)
+
+    if p1 < p2:
+        return n1
+    elif p1>p2:
+        return n
+    else:
+        h="Empate"
+        return h
+
+ba=battle(nombre,nombre1)
+print ('Ganador:',ba)
