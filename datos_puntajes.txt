@@ -1,0 +1,5 @@
+memo, https://api.github.com/users/memo 626.2
+pepe, https://api.github.com/users/pepe 79.60000000000001
+mario, https://api.github.com/users/mario 34.400000000000006
+rodrigore, https://api.github.com/users/rodrigore 42.0
+carlos, https://api.github.com/users/carlos 7.6
